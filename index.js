@@ -6,11 +6,11 @@ import 'dotenv/config'; // مهم عشان يقرأ .env
 
 const app = express();
 const port = process.env.PORT || 3000;
-const url = "https://four-aluminum-charger.glitch.me/";
 
 app.get('/', (req, res) => res.send('Hello World!'));
 app.head('/', (req, res) => res.sendStatus(200));
-app.listen(port, () => console.log(`Server running at ${url} on port ${port}`));
+
+app.listen(port, () => console.log(`Server running on port ${port}`));
 
 process.on('uncaughtException', (err) => {
     console.error(`Uncaught Exception: ${err.message}`);
@@ -21,7 +21,7 @@ process.on('unhandledRejection', (reason, promise) => {
 
 setInterval(async () => {
     try {
-        const response = await fetch(url, { method: 'HEAD' });
+        const response = await fetch(`http://localhost:${port}`, { method: 'HEAD' });
         console.log(`HEAD ping (${response.status})`);
     } catch (error) {
         console.error('Ping error:', error);
