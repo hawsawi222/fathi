@@ -13,22 +13,21 @@ app.head('/', (req, res) => res.sendStatus(200));
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
 process.on('uncaughtException', (err) => {
-    console.error(`Uncaught Exception: ${err.message}`);
+  console.error(`Uncaught Exception: ${err.message}`);
 });
 process.on('unhandledRejection', (reason, promise) => {
-    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
 setInterval(async () => {
-    try {
-        const response = await fetch(`http://localhost:${port}`, { method: 'HEAD' });
-        console.log(`HEAD ping (${response.status})`);
-    } catch (error) {
-        console.error('Ping error:', error);
-    }
+  try {
+    const response = await fetch(`http://localhost:${port}`, { method: 'HEAD' });
+    console.log(`HEAD ping (${response.status})`);
+  } catch (error) {
+    console.error('Ping error:', error);
+  }
 }, 300000); // كل 5 دقايق
 
-// ✅ تشغيل كل حساب بتأخير لتجنب الطرد
 const cleanTokens = tokens.filter(t => t?.token?.length > 30);
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -47,6 +46,6 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
     client.on('debug', (msg) => console.debug(msg));
 
     await client.connect();
-    await delay(8000); // تأخير 8 ثواني بين كل حساب
+    await delay(8000);
   }
 })();
